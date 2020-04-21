@@ -17,7 +17,11 @@ set cpo&vim
 function! s:make_output_file_path()
   let current_file_path = expand('%:h')
   let current_file_name = expand('%:t')
-  return current_file_path . "/out/" . current_file_name
+  let save_dir = current_file_path . "/out"
+  if !isdirectory(save_dir)
+    call mkdir(save_dir)
+  endif
+  return save_dir . "/" . current_file_name
 endfunction
 
 " lineからincludeするファイルのパスを取得する
@@ -42,20 +46,34 @@ endfunction
 function! markdowncat#cat()
   " Make out put file
   let out_file_path = s:make_output_file_path()
-  echo out_file_path
+  "echo out_file_path
 
   let current_file_path = expand('%:p')
-  echo current_file_path
+  "echo current_file_path
 
-
+  " Open new buffer
+  let bufexists_flag = 0
   let buffer_name = "markdowncat"
-  vnew `=buffer_name`
-  let g:markdowncat_output_buffer_nr = bufnr("%")
-  setlocal noswapfile
+  if (bufexists(buffer_name) > 0)
+    let bufexists_flag = 1
+  endif
+
+  if (bufexists_flag)
+    split
+    execute "b " . g:markdowncat_output_buffer_nr
+  else
+    vnew `=buffer_name`
+    let g:markdowncat_output_buffer_nr = bufnr("%")
+    setlocal noswapfile
+  endif
 
   execute "%delete"
   setlocal write
   call s:make_markdowncat(current_file_path)
+
+  " save buffert to file
+  execute "write! " . out_file_path
+  quit!
 
 endfunction
 
