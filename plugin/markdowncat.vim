@@ -17,6 +17,10 @@ if !exists('g:markdowncat_out_dir_path')
   let g:markdowncat_out_dir_path = "./out"
 endif
 
+if !exists('g:markdowncat_execute_file_extension')
+  let g:markdowncat_execute_file_extension = "markdowncat"
+endif
+
 command! -nargs=0 MarkdownCat :call markdowncat#cat()
 
 let &cpo = s:save_cpo
