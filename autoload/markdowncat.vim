@@ -5,11 +5,10 @@
 " Version:  1.0
 " Lisence:  VIM LICENSE
 
-" TODO 再読み込み防止プラグインが完成したら元に戻す
-" if &cp || exists("g:autoloaded_markdowncat")
-"   finish
-" endif
-" let g:autoloaded_markdowncat = '1'
+if &cp || exists("g:autoloaded_markdowncat")
+  finish
+endif
+let g:autoloaded_markdowncat = '1'
 
 let s:cpo_save = &cpo
 set cpo&vim
@@ -27,23 +26,46 @@ function! s:make_output_file_path()
   return save_dir . "/" . output_file_name
 endfunction
 
+" $includeの書式
+let s:markdowncat_include_reg_format = '\v\$include\="([^"]+)"'
+
 " lineからincludeするファイルのパスを取得する
 function! s:get_include_file_path(line)
-  let read_file_path = matchlist(a:line, '\v\$include\="([^"]+)"')[1]
+  let read_file_path = matchlist(a:line, s:markdowncat_include_reg_format)[1]
   return read_file_path
 endfunction
 
 " file_pathのファイルを読み込んでバッファに書き込みする
 function! s:make_markdowncat(file_path)
   for line in readfile(a:file_path)
-    if line =~ "$include"
+    if line =~ "^$include"
       " 読み込むファイル名を取得
       let read_file_path = s:get_include_file_path(line)
       call s:make_markdowncat(read_file_path)
+
+      " $include="" 以降を出力
+      let remain_lin =  substitute(line, s:markdowncat_include_reg_format, '', '')
+      call append(line('$'), remain_lin)
     else
       call append(line('$'), line)
     endif
   endfor
+endfunction
+
+function! s:markdowncat_find_window_by_buffer_number(buffer_number)
+  return filter(range(1, winnr("$")), 'winbufnr(v:val)==' . a:buffer_number)
+endfunction
+
+function! s:markdowncat_singleton_buffer(buffer_number, split)
+  let winlist = s:markdowncat_find_window_by_buffer_number(a:buffer_number)
+  if empty(winlist)
+    if a:split
+      split
+    endif
+    exe "b " . a:buffer_number
+  else
+    exe winlist[0] . "wincmd w"
+  endif
 endfunction
 
 function! markdowncat#cat()
@@ -70,8 +92,7 @@ function! markdowncat#cat()
   endif
 
   if (bufexists_flag)
-    split
-    execute "b " . g:markdowncat_output_buffer_nr
+    call s:markdowncat_singleton_buffer(g:markdowncat_output_buffer_nr, 1)
   else
     vnew `=buffer_name`
     let g:markdowncat_output_buffer_nr = bufnr("%")
@@ -84,7 +105,7 @@ function! markdowncat#cat()
 
   " save buffert to file
   execute "write! " . out_file_path
-  quit!
+  "quit!
 
 endfunction
 
