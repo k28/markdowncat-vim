@@ -86,7 +86,7 @@ function! markdowncat#cat()
 
   " Open new buffer
   let bufexists_flag = 0
-  let buffer_name = "markdowncat"
+  let buffer_name = out_file_path
   if (bufexists(buffer_name) > 0)
     let bufexists_flag = 1
   endif
