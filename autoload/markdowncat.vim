@@ -3,7 +3,7 @@
 " File:     tasklog.vim
 " Author:   k28 <k28@me.com>
 " Version:  1.0
-" Lisence:  VIM LICENSE
+" Lisence:  MIT license
 
 if &cp || exists("g:autoloaded_markdowncat")
   finish

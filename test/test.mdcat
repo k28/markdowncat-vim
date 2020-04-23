@@ -1,0 +1,8 @@
+# Sample Code
+
+Hello
+
+$include="test/intro1.md" <br/>
+
+$include="test/intro2.md"
+

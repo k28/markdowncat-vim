@@ -3,7 +3,7 @@
 " File:     markdowncat.vim
 " Author:   k28 <k28@me.com>
 " Version:  0.1
-" Lisence:  VIM LICENSE
+" Lisence:  MIT license
 
 if exists('g:loaded_markdown_cat')
   finish
@@ -13,12 +13,8 @@ let g:loaded_markdown_cat = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-if !exists('g:markdowncat_out_dir_path')
-  let g:markdowncat_out_dir_path = "./out"
-endif
-
 if !exists('g:markdowncat_execute_file_extension')
-  let g:markdowncat_execute_file_extension = "markdowncat"
+  let g:markdowncat_execute_file_extension = "mdcat"
 endif
 
 command! -nargs=0 MarkdownCat :call markdowncat#cat()
