@@ -2,7 +2,7 @@
 " Markdownファイルをcat(結合)してファイルに出力する
 " File:     markdowncat.vim
 " Author:   k28 <k28@me.com>
-" Version:  0.1
+" Version:  1.0
 " Lisence:  MIT license
 
 if exists('g:loaded_markdown_cat')
