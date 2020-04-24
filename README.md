@@ -1,6 +1,24 @@
 # markdowncat-vim
 
-# Task List
-- __done__ 実行した時にバッファを多重に開かないようにする
-- __here__ ヘルプを作成する
-- READMEを整備する
+## INTRODUCTION
+
+*markdowncat* replaces the file with a token in a specific format.  
+This is the Vim version of markdowoncat of Visual Studio Code.  
+
+
+## USAGE
+
+1. Create an {file_name.mdcat} file. (file_name is an arbitrary file name.)
+2. Open the file you created in "1" and use markdown to describe it.
+3. Create {file_name.md} by collecting files with `:MarkdownCat`.
+
+Support format  
+
+Include file  
+
+```vim
+$include="<file_path>"
+```
+
+replace with {file_path} file.  
+
