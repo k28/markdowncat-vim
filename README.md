@@ -3,7 +3,7 @@
 ## INTRODUCTION
 
 *markdowncat* replaces the file with a token in a specific format.  
-This is the Vim version of markdowoncat of Visual Studio Code.  
+This is the Vim version of [markdowoncat](https://github.com/poyonshot/markdowncat) of Visual Studio Code.  
 
 
 ## USAGE
