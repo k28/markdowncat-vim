@@ -29,6 +29,18 @@ endfunction
 " $includeの書式
 let s:markdowncat_include_reg_format = '\v\$include\="([^"]+)"'
 
+" file_pathのファイルを読み込んで出力する
+function! s:read_file_and_write(file_path)
+
+  " ファイル名をコメントで出力する
+  let file_name = fnamemodify(a:file_path, ":t")
+  call append(line('$'), '<!-- ' . file_name . ' -->')
+
+  for line in readfile(a:file_path)
+      call append(line('$'), line)
+  endfor
+endfunction
+
 " lineからincludeするファイルのパスを取得する
 function! s:get_include_file_path(line)
   let read_file_path = matchlist(a:line, s:markdowncat_include_reg_format)[1]
@@ -41,7 +53,7 @@ function! s:make_markdowncat(file_path)
     if line =~ "^$include"
       " 読み込むファイル名を取得
       let read_file_path = s:get_include_file_path(line)
-      call s:make_markdowncat(read_file_path)
+      call s:read_file_and_write(read_file_path)
 
       " $include="" 以降を出力
       let remain_lin =  substitute(line, s:markdowncat_include_reg_format, '', '')
