@@ -1,6 +1,6 @@
 *markdowncat.txt*	Cat markdown file.
 
-Version : 1.0
+Version : 1.1
 Author  : k28 <k28@me.com>
 License : MIT license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
@@ -104,6 +104,8 @@ CHANGELOG				*markdowncat-changelog*
 
 1.0	2020-04-24
 	- New
+1.1	2020-05-02
+	- Comment support
 
 
 ==============================================================================
