@@ -62,6 +62,14 @@ https://github.com/k28/markdowncat.vim
 <
 {file_path}を読み込んで置き換えます。 
 
+コメント >
+	// line comment
+	<!--
+	block comment
+	-->
+<
+1行コメントとブロックコメントは無視します。
+
 
 ==============================================================================
 インターフェイス				*markdowncat-interface*

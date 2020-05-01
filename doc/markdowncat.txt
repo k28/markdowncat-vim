@@ -61,6 +61,13 @@ Include file >
 <
 replace with {file_path} file.
 
+Comment >
+	// line comment
+	<!--
+	block comment
+	-->
+<
+the line comment and the block comment are ignored.
 
 ==============================================================================
 INTERFACE				*markdowncat-interface*

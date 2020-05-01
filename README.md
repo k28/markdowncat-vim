@@ -12,13 +12,23 @@ This is the Vim version of [markdowoncat](https://github.com/poyonshot/markdownc
 2. Open the file you created in "1" and use markdown to describe it.
 3. Create {file_name.md} by collecting files with `:MarkdownCat`.
 
-Support format  
+## Support format  
 
-Include file  
+### Include file  
 
 ```vim
 $include="<file_path>"
 ```
 
 replace with {file_path} file.  
+
+### Comment
+
+```vim
+// line comment
+
+<!--
+block comment
+-->
+```
 

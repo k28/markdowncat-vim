@@ -2,7 +2,7 @@
 " Cat markdown to file.
 " File:     tasklog.vim
 " Author:   k28 <k28@me.com>
-" Version:  1.0
+" Version:  1.1
 " Lisence:  MIT license
 
 if &cp || exists("g:autoloaded_markdowncat")
@@ -47,15 +47,42 @@ function! s:get_include_file_path(line)
   return read_file_path
 endfunction
 
+let s:markdowncat_is_comment_block = 0
+" コメント行かチェックする
+function! s:is_comment(line)
+  if a:line =~ "^ \*\/\/"
+    return 1
+  end
+
+  if a:line =~ "^ \*\<!--"
+    let s:markdowncat_is_comment_block = 1
+    return 1
+  end
+
+  if a:line =~ "--\> \*$"
+    let s:markdowncat_is_comment_block = 0
+    " この行はコメントとして処理する
+    return 1
+  end
+
+  return s:markdowncat_is_comment_block
+endfunction
+
 " file_pathのファイルを読み込んでバッファに書き込みする
 function! s:make_markdowncat(file_path)
   for line in readfile(a:file_path)
+
+    if s:is_comment(line)
+      continue
+    endif
+
     if line =~ "^$include"
       " 読み込むファイル名を取得
       let read_file_path = s:get_include_file_path(line)
       call s:read_file_and_write(read_file_path)
 
-      " $include="" 以降を出力
+      " 続けて何かある時には, 空行を追加してから $include="" 以降を出力
+      call append(line('$'), "")
       let remain_lin =  substitute(line, s:markdowncat_include_reg_format, '', '')
       call append(line('$'), remain_lin)
     else
