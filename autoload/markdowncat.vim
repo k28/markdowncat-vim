@@ -81,9 +81,10 @@ function! s:make_markdowncat(file_path)
       let read_file_path = s:get_include_file_path(line)
       call s:read_file_and_write(read_file_path)
 
-      " 続けて何かある時には, 空行を追加してから $include="" 以降を出力
+      " 続けて何かある時には, 後ろの空白を削除, 改行を入れて追加する
       call append(line('$'), "")
-      let remain_lin =  substitute(line, s:markdowncat_include_reg_format, '', '')
+      let delete_include_token = s:markdowncat_include_reg_format . ' *'
+      let remain_lin =  substitute(line, delete_include_token, '', '')
       call append(line('$'), remain_lin)
     else
       call append(line('$'), line)

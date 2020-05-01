@@ -12,6 +12,6 @@ ignore...
 -->
 --
 
-$include="test/intro2.md" <div style="hohoge"></div>
+$include="test/intro2.md"     <div style="hohoge"></div>
 
 
