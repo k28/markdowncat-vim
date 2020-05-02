@@ -1,6 +1,6 @@
 *markdowncat.txt*	Cat markdown file.
 
-Version : 1.1
+Version : 1.11
 Author  : k28 <k28@me.com>
 License : MIT license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
@@ -63,9 +63,9 @@ replace with {file_path} file.
 
 Comment >
 	// line comment
-	<!--
+	/*
 	block comment
-	-->
+	*/
 <
 the line comment and the block comment are ignored.
 
@@ -106,6 +106,8 @@ CHANGELOG				*markdowncat-changelog*
 	- New
 1.1	2020-05-02
 	- Comment support
+1.11	2020-05-02
+	- Bug fix
 
 
 ==============================================================================

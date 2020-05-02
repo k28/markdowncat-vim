@@ -2,7 +2,7 @@
 " Cat markdown to file.
 " File:     tasklog.vim
 " Author:   k28 <k28@me.com>
-" Version:  1.1
+" Version:  1.11
 " Lisence:  MIT license
 
 if &cp || exists("g:autoloaded_markdowncat")
@@ -54,12 +54,12 @@ function! s:is_comment(line)
     return 1
   end
 
-  if a:line =~ "^ \*\<!--"
+  if a:line =~ "^ \*\/\\*"
     let s:markdowncat_is_comment_block = 1
     return 1
   end
 
-  if a:line =~ "--\> \*$"
+  if a:line =~ "\\*\/ \*$"
     let s:markdowncat_is_comment_block = 0
     " この行はコメントとして処理する
     return 1

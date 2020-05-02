@@ -1,6 +1,6 @@
 *markdowncat.txt*	日本語ヘルプ
 
-Version : 1.1
+Version : 1.11
 Author  : k28 <k28@me.com>
 License : MIT license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
@@ -64,9 +64,9 @@ https://github.com/k28/markdowncat.vim
 
 コメント >
 	// line comment
-	<!--
+	/*
 	block comment
-	-->
+	*/
 <
 1行コメントとブロックコメントは無視します。
 
@@ -107,6 +107,8 @@ TODO						*markdowncat-todo*
 	- 新規作成
 1.1	2020-05-02
 	- コメント書式サポート
+1.11	2020-05-02
+	- コメント書式が間違っていたので修正
 
 
 ==============================================================================

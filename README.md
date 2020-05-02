@@ -27,8 +27,8 @@ replace with {file_path} file.
 ```vim
 // line comment
 
-<!--
+/*
 block comment
--->
+*/
 ```
 

@@ -6,10 +6,10 @@ $include="test/intro1.md" <br/>
 // this is comment...
 // ignore
 --
-<!--
+/*
 This is also comment...
 ignore...
--->
+*/
 --
 
 $include="test/intro2.md"     <div style="hohoge"></div>
